@@ -1,0 +1,223 @@
+{
+  "source": "data\\raw\\sample_weather.nc",
+  "metadata": {
+    "dimensions": {
+      "time": 4,
+      "lat": 24,
+      "lon": 32
+    },
+    "coordinates": {
+      "time": {
+        "dims": [
+          "time"
+        ],
+        "shape": [
+          4
+        ],
+        "dtype": "datetime64[ns]",
+        "range": {
+          "min": "1777593600000000000.0000",
+          "max": "1777852800000000000.0000"
+        },
+        "attrs": {
+          "long_name": "valid time"
+        }
+      },
+      "lat": {
+        "dims": [
+          "lat"
+        ],
+        "shape": [
+          24
+        ],
+        "dtype": "float64",
+        "range": {
+          "min": "8.0000",
+          "max": "37.0000"
+        },
+        "attrs": {
+          "units": "degrees_north",
+          "long_name": "latitude"
+        }
+      },
+      "lon": {
+        "dims": [
+          "lon"
+        ],
+        "shape": [
+          32
+        ],
+        "dtype": "float64",
+        "range": {
+          "min": "68.0000",
+          "max": "97.0000"
+        },
+        "attrs": {
+          "units": "degrees_east",
+          "long_name": "longitude"
+        }
+      }
+    },
+    "variables": {
+      "temperature": {
+        "dims": [
+          "time",
+          "lat",
+          "lon"
+        ],
+        "shape": [
+          4,
+          24,
+          32
+        ],
+        "dtype": "float64",
+        "units": "K",
+        "long_name": "Air temperature",
+        "range": {
+          "min": "291.4507",
+          "max": "303.4274"
+        },
+        "statistics": {
+          "count": 3072,
+          "missing": 0,
+          "mean": "297.6925",
+          "std": "2.4707",
+          "min": "291.4507",
+          "max": "303.4274"
+        },
+        "attrs": {
+          "units": "K",
+          "long_name": "Air temperature"
+        }
+      },
+      "pressure": {
+        "dims": [
+          "time",
+          "lat",
+          "lon"
+        ],
+        "shape": [
+          4,
+          24,
+          32
+        ],
+        "dtype": "float64",
+        "units": "hPa",
+        "long_name": "Surface pressure",
+        "range": {
+          "min": "1003.0189",
+          "max": "1009.6194"
+        },
+        "statistics": {
+          "count": 3072,
+          "missing": 0,
+          "mean": "1006.2269",
+          "std": "1.0661",
+          "min": "1003.0189",
+          "max": "1009.6194"
+        },
+        "attrs": {
+          "units": "hPa",
+          "long_name": "Surface pressure"
+        }
+      },
+      "humidity": {
+        "dims": [
+          "time",
+          "lat",
+          "lon"
+        ],
+        "shape": [
+          4,
+          24,
+          32
+        ],
+        "dtype": "float64",
+        "units": "%",
+        "long_name": "Relative humidity",
+        "range": {
+          "min": "37.9529",
+          "max": "72.5332"
+        },
+        "statistics": {
+          "count": 3072,
+          "missing": 0,
+          "mean": "53.2640",
+          "std": "6.4055",
+          "min": "37.9529",
+          "max": "72.5332"
+        },
+        "attrs": {
+          "units": "%",
+          "long_name": "Relative humidity"
+        }
+      },
+      "wind_speed": {
+        "dims": [
+          "time",
+          "lat",
+          "lon"
+        ],
+        "shape": [
+          4,
+          24,
+          32
+        ],
+        "dtype": "float64",
+        "units": "m/s",
+        "long_name": "Wind speed",
+        "range": {
+          "min": "1.5418",
+          "max": "6.7103"
+        },
+        "statistics": {
+          "count": 3072,
+          "missing": 0,
+          "mean": "4.4982",
+          "std": "0.9448",
+          "min": "1.5418",
+          "max": "6.7103"
+        },
+        "attrs": {
+          "units": "m/s",
+          "long_name": "Wind speed"
+        }
+      },
+      "precipitation": {
+        "dims": [
+          "time",
+          "lat",
+          "lon"
+        ],
+        "shape": [
+          4,
+          24,
+          32
+        ],
+        "dtype": "float64",
+        "units": "mm",
+        "long_name": "Precipitation",
+        "range": {
+          "min": "0.0000",
+          "max": "16.9352"
+        },
+        "statistics": {
+          "count": 3072,
+          "missing": 0,
+          "mean": "2.1527",
+          "std": "2.4712",
+          "min": "0.0000",
+          "max": "16.9352"
+        },
+        "attrs": {
+          "units": "mm",
+          "long_name": "Precipitation"
+        }
+      }
+    },
+    "attributes": {
+      "title": "Sample multi-variable weather dataset",
+      "source": "Generated locally for GUI and model testing"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
+RAW_DATA_DIR = DATA_DIR / "raw"
+PROCESSED_DATA_DIR = DATA_DIR / "processed"
+EXPORT_DIR = DATA_DIR / "exports"
+REPORT_DIR = EXPORT_DIR / "reports"
+PLOT_EXPORT_DIR = EXPORT_DIR / "plots"
+CARTOPY_CACHE_DIR = DATA_DIR / "cartopy_cache"
+LOG_DIR = BASE_DIR / "logs"
+
+SUPPORTED_NETCDF_EXTENSIONS = {".nc", ".netcdf", ".cdf"}
+SUPPORTED_GRIB_EXTENSIONS = {".grib", ".grb", ".grib2", ".grb2"}
+SUPPORTED_GRD_EXTENSIONS = {".grd"}
+SUPPORTED_DATASET_EXTENSIONS = (
+    SUPPORTED_NETCDF_EXTENSIONS
+    | SUPPORTED_GRIB_EXTENSIONS
+    | SUPPORTED_GRD_EXTENSIONS
+)
+
+DEFAULT_PROJECTION = "Auto"
+SUPPORTED_PROJECTIONS = ["Auto", "PlateCarree", "Mercator", "Orthographic"]
+DEFAULT_RENDER_MAX_CELLS = 250000

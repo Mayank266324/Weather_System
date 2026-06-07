@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Weather Data Analysis Report</title>
+  <style>
+    body { font-family: Segoe UI, Arial, sans-serif; margin: 28px; color: #17212b; }
+    h1, h2 { color: #0b4778; }
+    table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+    th, td { border: 1px solid #c8d3df; padding: 6px 8px; font-size: 12px; }
+    th { background: #e7f1fb; }
+    code { background: #eef3f7; padding: 2px 4px; }
+  </style>
+</head>
+<body>
+  <h1>Weather Data Analysis Report</h1>
+  <p><b>Generated:</b> 2026-05-22 02:56:40.496745</p>
+  <p><b>Dataset:</b> Sample multi-variable weather dataset</p>
+  <p><b>Source:</b> data\raw\sample_weather.nc</p>
+  <p><b>Active variable:</b> <code>temperature</code></p>
+  <h2>Dimensions</h2>
+  <pre>{'time': 4, 'lat': 24, 'lon': 32}</pre>
+  <h2>Coordinate Ranges</h2>
+  <pre>{'time': {'min': '2026-05-01T00:00:00.000000000', 'max': '2026-05-04T00:00:00.000000000'}, 'lat': {'min': '8.0', 'max': '37.0'}, 'lon': {'min': '68.0', 'max': '97.0'}}</pre>
+  <h2>Statistics</h2>
+  <pre>{'count': 768, 'missing': 0, 'mean': '297.3324', 'std': '2.3477', 'min': '291.9812', 'max': '301.9482', 'units': 'K', 'dims': 'lat, lon', 'shape': '24 x 32'}</pre>
+  <h2>Validation</h2>
+  <pre>{'valid': True, 'errors': [], 'warnings': [], 'lat_name': 'lat', 'lon_name': 'lon', 'time_name': 'time'}</pre>
+  <h2>Telemetry Sample</h2>
+  <table>
+    <tr><th>Timestamp</th><th>Latitude</th><th>Longitude</th><th>Value</th><th>Units</th><th>Anomaly</th></tr>
+    <tr><td>2026-05-02T00:00:00.000000000</td><td>8.0000</td><td>68.0000</td><td>298.9016</td><td>K</td><td>1.5692</td></tr>
+<tr><td>2026-05-02T00:00:00.000000000</td><td>8.0000</td><td>68.9355</td><td>300.0150</td><td>K</td><td>2.6826</td></tr>
+<tr><td>2026-05-02T00:00:00.000000000</td><td>8.0000</td><td>69.8710</td><td>300.9515</td><td>K</td><td>3.6191</td></tr>
+<tr><td>2026-05-02T00:00:00.000000000</td><td>8.0000</td><td>70.8065</td><td>298.5806</td><td>K</td><td>1.2481</td></tr>
+<tr><td>2026-05-02T00:00:00.000000000</td><td>8.0000</td><td>71.7419</td><td>298.6565</td><td>K</td><td>1.3240</td></tr>
+<tr><td>2026-05-02T00:00:00.000000000</td><td>8.0000</td><td>72.6774</td><td>298.6595</td><td>K</td><td>1.3271</td></tr>
+<tr><td>2026-05-02T00:00:00.000000000</td><td>8.0000</td><td>73.6129</td><td>298.7598</td><td>K</td><td>1.4274</td></tr>
+<tr><td>2026-05-02T00:00:00.000000000</td><td>8.0000</td><td>74.5484</td><td>299.4381</td><td>K</td><td>2.1057</td></tr>
+<tr><td>2026-05-02T00:00:00.000000000</td><td>8.0000</td><td>75.4839</td><td>299.6616</td><td>K</td><td>2.3292</td></tr>
+<tr><td>2026-05-02T00:00:00.000000000</td><td>8.0000</td><td>76.4194</td><td>299.7108</td><td>K</td><td>2.3784</td></tr>
+  </table>
+  <h2>Metadata Keys</h2>
+  <pre>['dimensions', 'coordinates', 'variables', 'attributes']</pre>
+</body>
+</html>

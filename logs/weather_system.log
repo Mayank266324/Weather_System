@@ -1,0 +1,37 @@
+2026-05-22 02:55:57,707 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-22 02:56:12,815 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-22 02:56:14,072 | INFO | model.export_manager | Exported telemetry CSV: C:\Users\kamra\Desktop\intern\Weather_system\data\exports\telemetry_20260522_025614.csv
+2026-05-22 02:56:40,457 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-22 02:56:40,492 | INFO | model.export_manager | Exported telemetry CSV: C:\Users\kamra\Desktop\intern\Weather_system\data\exports\smoke_telemetry_20260522_025640.csv
+2026-05-22 02:56:40,498 | INFO | model.report_manager | Generated HTML report: C:\Users\kamra\Desktop\intern\Weather_system\data\exports\reports\weather_report_20260522_025640.html
+2026-05-22 02:56:40,869 | INFO | model.report_manager | Generated PDF report: C:\Users\kamra\Desktop\intern\Weather_system\data\exports\reports\weather_report_20260522_025640.pdf
+2026-05-22 02:56:56,340 | INFO | model.core.dataset_manager | Loaded GRD dataset: data\raw\sample_grid.grd
+2026-05-22 02:58:10,194 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-22 02:58:36,439 | INFO | model.converter | Converted data\raw\sample_grid.grd to NetCDF: C:\Users\kamra\Desktop\intern\Weather_system\data\processed\sample_grid_standardized_20260522_025836.nc
+2026-05-22 03:00:29,672 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\data_stream-oper_stepType-instant.nc
+2026-05-22 03:01:24,475 | INFO | model.report_manager | Generated HTML report: C:\Users\kamra\Desktop\intern\Weather_system\data\exports\reports\weather_report_20260522_030124.html
+2026-05-22 03:01:24,580 | INFO | model.report_manager | Generated PDF report: C:\Users\kamra\Desktop\intern\Weather_system\data\exports\reports\weather_report_20260522_030124.pdf
+2026-05-22 03:02:10,384 | INFO | model.core.dataset_manager | Loaded GRD dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\sample_grid.grd
+2026-05-25 23:03:58,784 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-25 23:04:30,779 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-25 23:22:12,658 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\data_stream-oper_stepType-instant.nc
+2026-05-25 23:37:46,850 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\data_stream-oper_stepType-instant.nc
+2026-05-25 23:52:14,063 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\data_stream-oper_stepType-instant.nc
+2026-05-26 23:54:01,586 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-26 23:54:55,162 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-27 00:00:41,268 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\data_stream-oper_stepType-instant.nc
+2026-05-28 20:13:04,893 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-28 20:13:24,138 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-29 03:48:48,680 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\data_stream-oper_stepType-instant.nc
+2026-05-29 03:50:27,630 | INFO | model.export_manager | Exported metadata: C:\Users\kamra\Desktop\intern\Weather_system\data\exports\metadata_20260529_035027.json
+2026-05-29 03:55:48,614 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-29 03:56:04,578 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-29 03:56:16,544 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-29 03:57:00,841 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-29 03:57:45,438 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
+2026-05-29 03:58:49,659 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\data_stream-oper_stepType-instant.nc
+2026-05-29 04:00:17,429 | INFO | model.export_manager | Exported metadata: C:\Users\kamra\Desktop\intern\Weather_system\data\exports\metadata_20260529_040017.json
+2026-06-01 00:33:06,644 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\data_stream-oper_stepType-instant.nc
+2026-06-02 03:21:05,217 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\RF25_ind2025_rfp25.nc
+2026-06-06 02:00:01,451 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\data_stream-oper_stepType-instant.nc
+2026-06-06 02:01:17,036 | INFO | model.core.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\RF25_ind2025_rfp25.nc
