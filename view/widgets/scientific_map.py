@@ -2,6 +2,7 @@ import numpy as np
 from pathlib import Path
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
+from matplotlib.patches import Rectangle
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QFrame, QHBoxLayout, QLabel, QPushButton, QSlider, QVBoxLayout, QWidget
 
@@ -41,6 +42,7 @@ class ScientificMapPanel(QWidget):
         self._feature_cache = {}
         self._projection_name = "Auto"
         self._region_start = None
+        self._region_bounds = None
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
@@ -100,6 +102,7 @@ class ScientificMapPanel(QWidget):
             self._draw_overlay(axis, overlay, projection)
             if overlay.get("wind_vectors"):
                 self._draw_wind_vectors(axis, overlay["lon"], overlay["lat"], overlay, projection)
+        self._draw_region_overlay(axis, projection)
         axis.set_title(view_data["title"], fontsize=12, pad=10)
 
         if projection is not None:
@@ -167,10 +170,21 @@ class ScientificMapPanel(QWidget):
         if self._view_data is not None:
             self.render(self._view_data)
 
+    def set_region_bounds(self, bounds):
+        self._region_bounds = bounds or None
+        if self._view_data is not None:
+            self.render(self._view_data)
+
+    def clear_region_bounds(self):
+        self._region_bounds = None
+        if self._view_data is not None:
+            self.render(self._view_data)
+
     def clear(self):
         self._view_data = None
         self._axis = None
         self._hud = None
+        self._region_bounds = None
         self.figure.clear()
         axis = self.figure.add_subplot(111)
         axis.set_facecolor("#0d1420")
@@ -353,6 +367,63 @@ class ScientificMapPanel(QWidget):
                 )
             except Exception:
                 pass
+
+    def _draw_region_overlay(self, axis, projection):
+        if not self._region_bounds:
+            return
+
+        bounds = self._region_bounds
+        lon_min = float(bounds["lon_min"])
+        lon_max = float(bounds["lon_max"])
+        lat_min = float(bounds["lat_min"])
+        lat_max = float(bounds["lat_max"])
+        width = lon_max - lon_min
+        height = lat_max - lat_min
+        if width <= 0 or height <= 0:
+            return
+
+        patch_kwargs = {
+            "fill": True,
+            "facecolor": "#49baff",
+            "edgecolor": "#ffffff",
+            "linewidth": 2.4,
+            "linestyle": "--",
+            "alpha": 0.18,
+            "zorder": 7,
+        }
+        if projection is not None:
+            patch_kwargs["transform"] = ccrs.PlateCarree()
+
+        rect = Rectangle((lon_min, lat_min), width, height, **patch_kwargs)
+        axis.add_patch(rect)
+        axis.text(
+            lon_min,
+            lat_max,
+            " Selected region ",
+            color="#ffffff",
+            fontsize=9,
+            va="bottom",
+            ha="left",
+            bbox={"facecolor": "#0b111b", "edgecolor": "#ffffff", "alpha": 0.96},
+            transform=ccrs.PlateCarree() if projection is not None else axis.transData,
+            zorder=8,
+        )
+        for corner_lon, corner_lat in (
+            (lon_min, lat_min),
+            (lon_min, lat_max),
+            (lon_max, lat_min),
+            (lon_max, lat_max),
+        ):
+            scatter_kwargs = {
+                "s": 28,
+                "facecolor": "#ffffff",
+                "edgecolor": "#0b111b",
+                "linewidth": 0.8,
+                "zorder": 8,
+            }
+            if projection is not None:
+                scatter_kwargs["transform"] = ccrs.PlateCarree()
+            axis.scatter([corner_lon], [corner_lat], **scatter_kwargs)
 
     def _colormap(self, category):
         return {

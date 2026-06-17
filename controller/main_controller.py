@@ -1,3 +1,5 @@
+from PyQt5.QtCore import QTimer
+
 from model.core.dataset_manager import DatasetManager
 from model.export_manager import ExportManager
 from model.forecasting.forecast_manager import ForecastManager
@@ -26,6 +28,10 @@ class MainController:
         self.active_overlay_layers = []
         self.layer_opacity = 0.45
         self.region_bounds = None
+        self._pending_time_index = 0
+        self._refresh_timer = QTimer(self.view)
+        self._refresh_timer.setSingleShot(True)
+        self._refresh_timer.timeout.connect(self._flush_refresh)
 
         self.view.open_dataset_requested.connect(self.open_dataset)
         self.view.close_dataset_requested.connect(self.close_dataset)
@@ -70,7 +76,7 @@ class MainController:
                 self.dataset_manager.get_time_dimension_size(variable_name),
                 current_time,
             )
-            self._refresh_all(variable_name, self.view.current_time_slice())
+            self._schedule_refresh(variable_name, self.view.current_time_slice())
         except Exception as error:
             self.view.show_error("Variable Preview Failed", str(error))
 
@@ -79,7 +85,7 @@ class MainController:
             return
 
         try:
-            self._refresh_all(self.current_variable, time_index)
+            self._schedule_refresh(self.current_variable, time_index)
         except Exception as error:
             self.view.show_error("Variable Preview Failed", str(error))
 
@@ -99,17 +105,18 @@ class MainController:
         if not enabled and category in self.active_overlay_layers:
             self.active_overlay_layers.remove(category)
         if self.current_variable:
-            self.refresh_current_variable(self.view.current_time_slice())
+            self._schedule_refresh(self.current_variable, self.view.current_time_slice())
 
     def set_layer_opacity(self, opacity):
         self.layer_opacity = opacity
         if self.current_variable:
-            self.refresh_current_variable(self.view.current_time_slice())
+            self._schedule_refresh(self.current_variable, self.view.current_time_slice())
 
     def select_region(self, bounds):
         self.region_bounds = bounds
+        self.view.set_region_bounds(bounds)
         if self.current_variable:
-            self.refresh_current_variable(self.view.current_time_slice())
+            self._schedule_refresh(self.current_variable, self.view.current_time_slice())
 
     def close_dataset(self):
         self.dataset_manager.close_dataset()
@@ -118,6 +125,7 @@ class MainController:
         self.view.reset_dataset_view()
         self.active_overlay_layers = []
         self.region_bounds = None
+        self.view.clear_region_bounds()
         self.view.set_status("Dataset closed.")
 
     def _refresh_all(self, variable_name, time_index):
@@ -166,6 +174,19 @@ class MainController:
             f"({len(rows)} inspected grid cells"
             f"{'; regional selection active' if self.region_bounds else ''})"
         )
+
+    def _schedule_refresh(self, variable_name, time_index):
+        self._pending_variable = variable_name
+        self._pending_time_index = int(time_index)
+        self._refresh_timer.start(120)
+
+    def _flush_refresh(self):
+        variable_name = getattr(self, "_pending_variable", None)
+        if not variable_name:
+            return
+        if not self.dataset_manager.has_variable(variable_name):
+            return
+        self._refresh_all(variable_name, self._pending_time_index)
 
     def export_metadata(self):
         if not self.metadata:

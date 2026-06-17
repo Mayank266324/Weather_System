@@ -497,6 +497,12 @@ class MainWindow(QMainWindow):
     def set_map_data(self, view_data):
         self.map_panel.render(view_data)
 
+    def set_region_bounds(self, bounds):
+        self.map_panel.set_region_bounds(bounds)
+
+    def clear_region_bounds(self):
+        self.map_panel.clear_region_bounds()
+
     def set_metrics(self, metrics):
         self.metrics_panel.set_metrics(metrics)
 
@@ -520,6 +526,7 @@ class MainWindow(QMainWindow):
         self.plot_panel.clear()
         self.forecast_panel.clear()
         self.map_panel.clear()
+        self.map_panel.clear_region_bounds()
         self.map_panel.set_layers([])
         self.metrics_panel.clear()
         self.data_grid.clear()
