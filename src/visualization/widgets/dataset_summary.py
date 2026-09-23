@@ -15,13 +15,29 @@ class DatasetSummaryPanel(QWidget):
         self.tree.setStyleSheet(
             """
             QTreeWidget {
-                color: #d8e7f2;
-                background: #101722;
-                alternate-background-color: #142031;
+                color: #f8fafc;
+                background: #111827;
+                alternate-background-color: #121c2e;
+                border: 1px solid #263446;
+                border-radius: 12px;
+                padding: 4px;
             }
             QTreeWidget::item {
-                color: #d8e7f2;
-                min-height: 22px;
+                color: #f8fafc;
+                min-height: 24px;
+                padding: 4px 6px;
+            }
+            QTreeWidget::item:selected {
+                background: #17365f;
+                color: #ffffff;
+            }
+            QHeaderView::section {
+                background: #1a2333;
+                color: #f8fafc;
+                border: none;
+                border-bottom: 1px solid #263446;
+                padding: 7px 6px;
+                font-weight: 600;
             }
             """
         )

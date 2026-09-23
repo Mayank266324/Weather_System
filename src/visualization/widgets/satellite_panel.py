@@ -1,6 +1,8 @@
 from PyQt5.QtGui import QColor, QFont
 from PyQt5.QtWidgets import QLabel, QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget
 
+from src.visualization.widgets.dashboard_visuals import C
+
 
 class SatelliteLayerPanel(QWidget):
     """Future raster/satellite overlay workflow without decorative fake imagery."""
@@ -13,7 +15,7 @@ class SatelliteLayerPanel(QWidget):
         )
         self.description.setWordWrap(True)
         self.description.setFont(QFont("Segoe UI", 9))
-        self.description.setStyleSheet("color:#d8e7f2;padding:6px;")
+        self.description.setStyleSheet(f"color:{C['txt']};padding:6px;")
 
         self.table = QTableWidget(0, 4)
         self.table.setHorizontalHeaderLabels(["Layer", "Status", "Expected Grid", "Projection"])
@@ -25,14 +27,28 @@ class SatelliteLayerPanel(QWidget):
         self.table.setStyleSheet(
             """
             QTableWidget {
-                color: #d8e7f2;
-                alternate-background-color: #142031;
-                background: #101722;
-                gridline-color: #2c3c4d;
+                color: #f8fafc;
+                alternate-background-color: #121c2e;
+                background: #111827;
+                gridline-color: #263446;
+                border: 1px solid #263446;
+                border-radius: 12px;
             }
             QTableWidget::item {
-                color: #d8e7f2;
-                padding: 3px;
+                color: #f8fafc;
+                padding: 6px 8px;
+            }
+            QTableWidget::item:selected {
+                background: #17365f;
+                color: #ffffff;
+            }
+            QHeaderView::section {
+                background: #1a2333;
+                color: #f8fafc;
+                border: none;
+                border-bottom: 1px solid #263446;
+                padding: 7px 6px;
+                font-weight: 600;
             }
             """
         )

@@ -58,3 +58,44 @@
 2026-06-24 23:38:49,195 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: data\raw\sample_weather.nc
 2026-06-27 21:28:21,210 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\RF25_ind2025_rfp25.nc
 2026-06-27 21:28:33,461 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: C:\Users\kamra\Desktop\intern\Weather_system\data\raw\data_stream-oper_stepType-instant.nc
+2026-06-30 18:13:44,457 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-06-30 18:19:21,919 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\raw\data_stream-oper_stepType-accum.nc
+2026-06-30 18:23:12,661 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-06-30 18:25:43,337 | INFO | src.data.dataset_manager | Loaded GRD dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\sample_grid_standardized_20260522_025836.nc
+2026-06-30 18:25:52,074 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\raw\data_stream-oper_stepType-accum.nc
+2026-06-30 18:25:58,701 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\raw\data_stream-oper_stepType-instant.nc
+2026-06-30 18:28:11,185 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Datasets\archive (3)\JULY,25-31,2021,WEATHER,CLIMATE,DATA,NETCDF\JULY-CO\tavg3_2d_chm_Nx-202108230822output.23795.webform.nc
+2026-06-30 18:28:50,878 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Datasets\archive (4)\Drought Monitor\spei01 (1).nc
+2026-07-08 21:01:31,179 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-07-08 21:04:16,583 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-07-08 21:04:49,396 | INFO | src.reporting.export_manager | Exported metadata: D:\Programming\DRDO\Collaborator\Weather_system\reports\statistics\metadata_20260708_210449.json
+2026-07-08 21:09:04,063 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-07-08 21:15:35,110 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-07-08 21:18:13,314 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-07-08 21:20:08,089 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-07-08 21:22:27,602 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-07-08 21:29:14,456 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-07-12 12:07:38,368 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-16 19:41:03,881 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-16 19:46:11,106 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-16 20:05:33,885 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-16 21:39:29,666 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Datasets\archive (1)\OCEAN_RELATED_DATA\2018\data.nc4
+2026-09-16 21:39:30,904 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Datasets\archive (3)\JULY,25-31,2021,WEATHER,CLIMATE,DATA,NETCDF\JULY-CO\tavg3_2d_chm_Nx-202108230822output.23795.webform.nc
+2026-09-16 21:39:39,614 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Datasets\archive (1)\OCEAN_RELATED_DATA\2018\data.nc4
+2026-09-16 21:55:37,931 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Datasets\archive (1)\OCEAN_RELATED_DATA\2018\data.nc4
+2026-09-16 21:59:01,656 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Datasets\archive (1)\OCEAN_RELATED_DATA\2021\data.nc4
+2026-09-16 21:59:33,707 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-18 22:58:12,209 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-18 22:59:32,187 | INFO | src.reporting.export_manager | Exported metadata: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\reports\statistics\metadata_20260918_225932.json
+2026-09-18 23:06:48,306 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-18 23:07:36,040 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Datasets\archive (1)\OCEAN_RELATED_DATA\2018\data.nc4
+2026-09-18 23:08:06,540 | INFO | src.reporting.export_manager | Exported metadata: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\reports\statistics\metadata_20260918_230806.json
+2026-09-18 23:11:48,897 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-18 23:13:31,006 | INFO | src.data.dataset_manager | Loaded GRD dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\sample_grid_standardized_20260522_025836.nc
+2026-09-18 23:13:53,635 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-18 23:46:34,746 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-19 00:21:26,281 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-19 00:26:28,298 | INFO | src.reporting.export_manager | Exported metadata: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\reports\statistics\metadata_20260919_002628.json
+2026-09-19 01:05:33,083 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-19 01:22:22,266 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc
+2026-09-19 12:01:37,640 | INFO | src.data.dataset_manager | Loaded NetCDF dataset: D:\Programming\DRDO\Collaborator\Weather_system\Weather_system\data\processed\processed_dataset_20260607_213959.nc

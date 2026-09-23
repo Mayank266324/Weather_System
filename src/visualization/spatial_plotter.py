@@ -49,6 +49,10 @@ class ScientificMapPanel(QWidget):
         layout.addWidget(self.canvas)
         self.canvas.mpl_connect("motion_notify_event", self._inspect_point)
         self.canvas.mpl_connect("button_press_event", self._inspect_point)
+        self.canvas.mpl_connect(
+            "figure_leave_event",
+            self._hide_hover_info,
+        )
         self.canvas.mpl_connect("button_press_event", self._region_press)
         self.canvas.mpl_connect("button_release_event", self._region_release)
         self.clear()
@@ -77,8 +81,11 @@ class ScientificMapPanel(QWidget):
         self.figure.clear()
         projection = self._projection_for(view_data) if ccrs is not None else None
         projection_kind = self._projection_kind(view_data)
-        axis = self.figure.add_subplot(111, projection=projection) if projection is not None else self.figure.add_subplot(111)
+        axis_box, colorbar_box = self._layout_boxes(projection_kind, projection is not None)
+        axis = self.figure.add_axes(axis_box, projection=projection) if projection is not None else self.figure.add_axes(axis_box)
         self._axis = axis
+        axis.set_anchor("C")
+        axis.set_aspect("equal", adjustable="box")
         axis.set_facecolor("#0d1420")
         axis.tick_params(colors="#dce8f2", labelsize=9)
         axis.xaxis.label.set_color("#dce8f2")
@@ -101,7 +108,13 @@ class ScientificMapPanel(QWidget):
             if overlay.get("wind_vectors"):
                 self._draw_wind_vectors(axis, overlay["lon"], overlay["lat"], overlay, projection)
         self._draw_region_overlay(axis, projection)
-        axis.set_title(view_data["title"], fontsize=12, pad=10)
+        axis.set_title(
+            view_data["title"],
+            fontsize=13,
+            fontweight="bold",
+            pad=8,
+            color="#f0f6ff",
+        )
 
         if projection is not None:
             self._draw_cartopy_foreground(axis)
@@ -113,47 +126,41 @@ class ScientificMapPanel(QWidget):
         self._draw_wind_vectors(axis, lon, lat, view_data, projection)
         self._set_active_layer(view_data.get("category"))
 
-        colorbar = self.figure.colorbar(mesh, ax=axis, shrink=0.86, pad=0.02)
+        if colorbar_box is None:
+            colorbar = self.figure.colorbar(mesh, ax=axis, shrink=0.86, pad=0.02)
+        else:
+            colorbar = self.figure.colorbar(mesh, cax=self.figure.add_axes(colorbar_box))
         label = view_data.get("long_name", view_data.get("variable", "value"))
         units = view_data.get("units", "")
         colorbar.set_label(f"{label} ({units})" if units else label, color="#dce8f2")
         colorbar.ax.yaxis.set_tick_params(color="#dce8f2", labelcolor="#dce8f2")
 
-        ranges = view_data["coordinate_ranges"]
-        range_text = "; ".join(
-            f"{name}: {value['min']} to {value['max']}"
-            for name, value in ranges.items()
-        )
-        if projection is not None:
-            gis_text = (
-                "Cartopy regional GIS map + real lat/lon weather overlay"
-                if projection_kind == "regional"
-                else "Cartopy Orthographic globe + real lat/lon weather overlay"
-            )
-        else:
-            gis_text = "Lat/Lon map; install Cartopy for projected coastlines/borders"
-        axis.text(
-            0.01,
-            0.01,
-            f"{range_text}\n{gis_text}",
-            transform=axis.transAxes,
-            color="#dce8f2",
-            fontsize=8,
-            bbox={"facecolor": "#0b111b", "edgecolor": "#304050", "alpha": 0.8},
-        )
-        self._hud = axis.text(
-            0.99,
-            0.99,
-            self._default_hud(view_data),
-            transform=axis.transAxes,
-            ha="right",
-            va="top",
-            color="#f0f6ff",
+        # ---------------------------------------------------------
+        # HOVER INSPECTION TOOLTIP
+        # ---------------------------------------------------------
+
+        self._hud = axis.annotate(
+            "",
+            xy=(0, 0),
+            xytext=(14, 14),
+            textcoords="offset points",
+            ha="left",
+            va="bottom",
             fontsize=8.5,
-            bbox={"facecolor": "#0b111b", "edgecolor": "#49baff", "alpha": 0.86},
+            color="#F8FAFC",
+            annotation_clip=True,
+            zorder=100,
+            bbox={
+                "boxstyle": "round,pad=0.45",
+                "facecolor": "#0B111B",
+                "edgecolor": "#49BAFF",
+                "linewidth": 1.0,
+                "alpha": 0.94,
+            },
         )
 
-        self.figure.subplots_adjust(left=0.045, right=0.885, top=0.91, bottom=0.07)
+        self._hud.set_visible(False)
+
         self.canvas.draw_idle()
 
     def set_layer_checked(self, category, checked):
@@ -185,6 +192,7 @@ class ScientificMapPanel(QWidget):
         self._region_bounds = None
         self.figure.clear()
         axis = self.figure.add_subplot(111)
+        axis.set_anchor("C")
         axis.set_facecolor("#0d1420")
         axis.text(
             0.5,
@@ -197,6 +205,30 @@ class ScientificMapPanel(QWidget):
         )
         axis.set_axis_off()
         self.canvas.draw_idle()
+
+    def _layout_boxes(self, projection_kind, has_projection):
+        """
+        Return plotting and colorbar geometry.
+
+        Keep the map dominant. The colorbar gets its own narrow column
+        without squeezing the actual globe.
+        """
+
+        if not has_projection:
+            return [0.06, 0.08, 0.88, 0.86], None
+
+        if projection_kind == "global":
+            # Large centered globe with a compact colorbar.
+            return (
+                [0.035, 0.055, 0.84, 0.89],
+                [0.895, 0.16, 0.022, 0.68],
+            )
+
+        # Regional projection
+        return (
+            [0.045, 0.07, 0.84, 0.86],
+            [0.895, 0.16, 0.022, 0.68],
+        )
 
     def _layer_bar(self):
         frame = QFrame()
@@ -291,15 +323,6 @@ class ScientificMapPanel(QWidget):
             gridlines.right_labels = False
             gridlines.xlabel_style = {"color": "#dce8f2", "size": 8}
             gridlines.ylabel_style = {"color": "#dce8f2", "size": 8}
-        axis.text(
-            0.015,
-            0.94,
-            f"Domain: {lat_min:.2f} to {lat_max:.2f}N, {lon_min:.2f} to {lon_max:.2f}E",
-            transform=axis.transAxes,
-            color="#dce8f2",
-            fontsize=8,
-            bbox={"facecolor": "#0b111b", "edgecolor": "#304050", "alpha": 0.7},
-        )
 
     def _draw_cartopy_foreground(self, axis):
         if self._feature_ready("physical", "coastline"):
@@ -317,16 +340,6 @@ class ScientificMapPanel(QWidget):
     def _draw_wind_vectors(self, axis, lon, lat, view_data, projection):
         vectors = view_data.get("wind_vectors")
         if not vectors:
-            if view_data.get("category") in {"wind", "wind_speed"}:
-                axis.text(
-                    0.02,
-                    0.93,
-                    "Wind scalar layer; u/v vector components not found",
-                    transform=axis.transAxes,
-                    color="#dce8f2",
-                    fontsize=8,
-                    bbox={"facecolor": "#0b111b", "edgecolor": "#304050", "alpha": 0.72},
-                )
             return
 
         u = vectors["u"]
@@ -434,54 +447,217 @@ class ScientificMapPanel(QWidget):
         }.get(category, "viridis")
 
     def _inspect_point(self, event):
-        if self._view_data is None or self._hud is None or event.inaxes is not self._axis:
+        """Show weather information for the grid cell under the cursor."""
+
+        if self._view_data is None:
             return
+
+        if self._axis is None:
+            return
+
+        if self._hud is None:
+            return
+
+        if event.inaxes is not self._axis:
+            self._hide_hover_info()
+            return
+
         if event.xdata is None or event.ydata is None:
+            self._hide_hover_info()
             return
 
-        lat = self._view_data["lat"]
-        lon = self._view_data["lon"]
-        values = self._view_data["values"]
+        # ---------------------------------------------------------
+        # Convert cursor position to geographic coordinates
+        # ---------------------------------------------------------
+
         lon_value, lat_value = self._event_lon_lat(event)
+
         if lon_value is None or lat_value is None:
+            self._hide_hover_info()
             return
 
-        if np.ndim(lat) == 1 and np.ndim(lon) == 1:
-            lat_index = int(np.nanargmin(np.abs(lat - lat_value)))
-            lon_index = int(np.nanargmin(np.abs(lon - lon_value)))
-            value = values[lat_index, lon_index]
-            nearest_lat = lat[lat_index]
-            nearest_lon = lon[lon_index]
-        else:
-            distance = (lat - lat_value) ** 2 + (lon - lon_value) ** 2
-            flat_index = int(np.nanargmin(distance))
-            value = np.ravel(values)[flat_index]
-            nearest_lat = np.ravel(lat)[flat_index]
-            nearest_lon = np.ravel(lon)[flat_index]
+        # ---------------------------------------------------------
+        # Dataset arrays
+        # ---------------------------------------------------------
 
-        self._hud.set_text(
-            "\n".join(
-                [
-                    "Spatial Inspection",
-                    f"Time: {self._view_data['timestamp']}",
-                    f"Lat/Lon: {nearest_lat:.3f}, {nearest_lon:.3f}",
-                    f"{self._view_data['variable']}: {value:.4f} {self._view_data.get('units', '')}",
-                ]
-            )
+        lat = np.asarray(
+            self._view_data["lat"],
+            dtype=float
         )
-        self.canvas.draw_idle()
 
-    def _default_hud(self, view_data):
-        values = np.asarray(view_data["values"], dtype=float)
-        return "\n".join(
+        lon = np.asarray(
+            self._view_data["lon"],
+            dtype=float
+        )
+
+        values = np.asarray(
+            self._view_data["values"],
+            dtype=float
+        )
+
+        # ---------------------------------------------------------
+        # Find nearest grid cell
+        # ---------------------------------------------------------
+
+        try:
+
+            if np.ndim(lat) == 1 and np.ndim(lon) == 1:
+
+                lat_index = int(
+                    np.nanargmin(
+                        np.abs(lat - lat_value)
+                    )
+                )
+
+                lon_index = int(
+                    np.nanargmin(
+                        np.abs(lon - lon_value)
+                    )
+                )
+
+                nearest_lat = float(
+                    lat[lat_index]
+                )
+
+                nearest_lon = float(
+                    lon[lon_index]
+                )
+
+                value = float(
+                    values[
+                        lat_index,
+                        lon_index
+                    ]
+                )
+
+            else:
+
+                distance = (
+                    (lat - lat_value) ** 2
+                    +
+                    (lon - lon_value) ** 2
+                )
+
+                flat_index = int(
+                    np.nanargmin(distance)
+                )
+
+                nearest_lat = float(
+                    np.ravel(lat)[flat_index]
+                )
+
+                nearest_lon = float(
+                    np.ravel(lon)[flat_index]
+                )
+
+                value = float(
+                    np.ravel(values)[flat_index]
+                )
+
+        except (ValueError, IndexError, TypeError):
+
+            self._hide_hover_info()
+
+            return
+
+        # ---------------------------------------------------------
+        # Format information
+        # ---------------------------------------------------------
+
+        variable = self._view_data.get(
+            "variable",
+            "Value"
+        )
+
+        units = self._view_data.get(
+            "units",
+            ""
+        )
+
+        timestamp = self._view_data.get(
+            "timestamp",
+            "--"
+        )
+
+        if np.isfinite(value):
+
+            value_text = (
+                f"{value:.4f} {units}"
+            ).strip()
+
+        else:
+
+            value_text = "N/A"
+
+        # ---------------------------------------------------------
+        # Tooltip
+        # ---------------------------------------------------------
+
+        tooltip = "\n".join(
             [
-                "Active Weather Layer",
-                f"Variable: {view_data['variable']}",
-                f"Time index: {view_data['time_index']}",
-                f"Timestamp: {view_data['timestamp']}",
-                f"Mean: {np.nanmean(values):.4f} {view_data.get('units', '')}",
+                "Spatial Inspection",
+                f"Time: {timestamp}",
+                f"Latitude: {nearest_lat:.3f}°",
+                f"Longitude: {nearest_lon:.3f}°",
+                f"{variable}: {value_text}",
             ]
         )
+
+        self._hud.set_text(
+            tooltip
+        )
+
+        # ---------------------------------------------------------
+        # Keep tooltip next to cursor
+        # ---------------------------------------------------------
+
+        self._hud.xy = (
+            event.xdata,
+            event.ydata,
+        )
+
+        canvas_width = self.canvas.get_width_height()[0]
+
+        if event.x is not None and event.x > canvas_width * 0.72:
+
+            self._hud.set_position(
+                (-14, 14)
+            )
+
+            self._hud.set_ha(
+                "right"
+            )
+
+        else:
+
+            self._hud.set_position(
+                (14, 14)
+            )
+
+            self._hud.set_ha(
+                "left"
+            )
+
+        # ---------------------------------------------------------
+        # Show tooltip
+        # ---------------------------------------------------------
+
+        self._hud.set_visible(
+            True
+        )
+
+        self.canvas.draw_idle()
+
+    def _hide_hover_info(self):
+        """Hide the weather inspection tooltip."""
+
+        if self._hud is not None:
+
+            self._hud.set_visible(
+                False
+            )
+
+            self.canvas.draw_idle()
 
     def _set_active_layer(self, category):
         for layer_category, button in self._layer_buttons.items():

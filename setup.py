@@ -9,6 +9,7 @@ setup(
         "xarray",
         "netCDF4",
         "cfgrib",
+        "eccodes",
         "pandas",
         "numpy",
         "matplotlib",

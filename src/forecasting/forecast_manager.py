@@ -30,14 +30,31 @@ class ForecastManager:
         future_steps=3,
         smoothing_window=1,
     ):
+        window_size = int(window_size)
+        horizon = int(horizon)
+        future_steps = int(future_steps)
+        smoothing_window = int(smoothing_window)
+        if window_size < 1:
+            raise ValueError("Lookback window must be at least 1 time step.")
+        if horizon < 1:
+            raise ValueError("Forecast horizon must be at least 1 time step.")
+        if future_steps < 1:
+            raise ValueError("Future steps must be at least 1.")
+        if smoothing_window < 1:
+            raise ValueError("Smoothing window must be at least 1 time step.")
+
         series_array = self.extract_regional_series(data_array, region_bounds)
         values = self.preprocessor.clean(series_array.values)
         values = self.preprocessor.smooth(values, smoothing_window)
 
-        if values.size < 3:
-            raise ValueError("Forecasting needs at least 3 time steps after preprocessing.")
+        if values.size < horizon + 2:
+            raise ValueError(
+                "Forecasting needs at least "
+                f"{horizon + 2} time steps for the selected horizon; "
+                f"only {values.size} are available."
+            )
 
-        window_size = min(int(window_size), max(1, values.size - 2))
+        window_size = min(window_size, values.size - horizon - 1)
         scaled, scale_state = self.preprocessor.scale(values)
         X, y = self.windowing.make_windows(scaled, window_size=window_size, horizon=horizon)
         if len(X) == 0:
@@ -93,6 +110,8 @@ class ForecastManager:
         reduce_dims = [dim for dim in working.dims if dim != time_dim]
         if reduce_dims:
             working = working.mean(dim=reduce_dims, skipna=True)
+        if working.size == 0 or not np.isfinite(np.asarray(working.values, dtype=float)).any():
+            raise ValueError("The selected region contains no valid numeric observations.")
         return working
 
     def _time_dim(self, data_array):

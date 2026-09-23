@@ -11,7 +11,7 @@ PLOT_EXPORT_DIR = BASE_DIR / "reports" / "plots"
 CARTOPY_CACHE_DIR = DATA_DIR / "external" / "cartopy_cache"
 LOG_DIR = BASE_DIR / "experiments" / "experiment_logs"
 
-SUPPORTED_NETCDF_EXTENSIONS = {".nc", ".netcdf", ".cdf"}
+SUPPORTED_NETCDF_EXTENSIONS = {".nc", ".nc4", ".netcdf", ".cdf"}
 SUPPORTED_GRIB_EXTENSIONS = {".grib", ".grb", ".grib2", ".grb2"}
 SUPPORTED_GRD_EXTENSIONS = {".grd"}
 SUPPORTED_DATASET_EXTENSIONS = (

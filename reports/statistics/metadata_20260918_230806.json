@@ -1,0 +1,251 @@
+{
+  "source": "D:\\Programming\\DRDO\\Datasets\\archive (1)\\OCEAN_RELATED_DATA\\2018\\data.nc4",
+  "metadata": {
+    "dimensions": {
+      "time": 24,
+      "latitude": 721,
+      "longitude": 1152
+    },
+    "coordinates": {
+      "time": {
+        "dims": [
+          "time"
+        ],
+        "shape": [
+          24
+        ],
+        "dtype": "datetime64[ns]",
+        "range": {
+          "min": "1533083400000000000.0000",
+          "max": "1533166200000000000.0000"
+        },
+        "attrs": {}
+      },
+      "longitude": {
+        "dims": [
+          "longitude"
+        ],
+        "shape": [
+          1152
+        ],
+        "dtype": "float64",
+        "range": {
+          "min": "-180.0000",
+          "max": "179.6875"
+        },
+        "attrs": {
+          "units": "degrees_east",
+          "long_name": "Longitude"
+        }
+      },
+      "latitude": {
+        "dims": [
+          "latitude"
+        ],
+        "shape": [
+          721
+        ],
+        "dtype": "float64",
+        "range": {
+          "min": "-90.0000",
+          "max": "90.0000"
+        },
+        "attrs": {
+          "units": "degrees_north",
+          "long_name": "Latitude"
+        }
+      }
+    },
+    "variables": {
+      "tdrop": {
+        "dims": [
+          "time",
+          "latitude",
+          "longitude"
+        ],
+        "shape": [
+          24,
+          721,
+          1152
+        ],
+        "dtype": "float32",
+        "units": "",
+        "long_name": "temperature_drop_across_cool_layer",
+        "range": {
+          "min": "0.0000",
+          "max": "1.3125"
+        },
+        "statistics": {
+          "count": 13327681,
+          "missing": 6606527,
+          "mean": "0.1725",
+          "std": "0.1265",
+          "min": "0.0000",
+          "max": "1.3125"
+        },
+        "attrs": {
+          "comments": "Unknown1 variable comment",
+          "long_name": "temperature_drop_across_cool_layer",
+          "units": "",
+          "grid_name": "grid01",
+          "grid_type": "linear",
+          "level_description": "Earth surface",
+          "time_statistic": "instantaneous"
+        }
+      },
+      "tbar": {
+        "dims": [
+          "time",
+          "latitude",
+          "longitude"
+        ],
+        "shape": [
+          24,
+          721,
+          1152
+        ],
+        "dtype": "float32",
+        "units": "",
+        "long_name": "mean_temperature_of_interface_layer",
+        "range": {
+          "min": "271.2161",
+          "max": "307.2477"
+        },
+        "statistics": {
+          "count": 13327681,
+          "missing": 6606527,
+          "mean": "287.4157",
+          "std": "11.4689",
+          "min": "271.2161",
+          "max": "307.2477"
+        },
+        "attrs": {
+          "comments": "Unknown1 variable comment",
+          "long_name": "mean_temperature_of_interface_layer",
+          "units": "",
+          "grid_name": "grid01",
+          "grid_type": "linear",
+          "level_description": "Earth surface",
+          "time_statistic": "instantaneous"
+        }
+      },
+      "tskinice": {
+        "dims": [
+          "time",
+          "latitude",
+          "longitude"
+        ],
+        "shape": [
+          24,
+          721,
+          1152
+        ],
+        "dtype": "float32",
+        "units": "",
+        "long_name": "sea_ice_skin_temperature",
+        "range": {
+          "min": "224.4580",
+          "max": "273.1600"
+        },
+        "statistics": {
+          "count": 13474968,
+          "missing": 6459240,
+          "mean": "271.4461",
+          "std": "4.9346",
+          "min": "224.4580",
+          "max": "273.1600"
+        },
+        "attrs": {
+          "comments": "Unknown1 variable comment",
+          "long_name": "sea_ice_skin_temperature",
+          "units": "",
+          "grid_name": "grid01",
+          "grid_type": "linear",
+          "level_description": "Earth surface",
+          "time_statistic": "instantaneous"
+        }
+      },
+      "rainocn": {
+        "dims": [
+          "time",
+          "latitude",
+          "longitude"
+        ],
+        "shape": [
+          24,
+          721,
+          1152
+        ],
+        "dtype": "float32",
+        "units": "",
+        "long_name": "ocean_rainfall",
+        "range": {
+          "min": "0.0000",
+          "max": "0.0359"
+        },
+        "statistics": {
+          "count": 13474968,
+          "missing": 6459240,
+          "mean": "0.0000",
+          "std": "0.0002",
+          "min": "0.0000",
+          "max": "0.0359"
+        },
+        "attrs": {
+          "comments": "Unknown1 variable comment",
+          "long_name": "ocean_rainfall",
+          "units": "",
+          "grid_name": "grid01",
+          "grid_type": "linear",
+          "level_description": "Earth surface",
+          "time_statistic": "instantaneous"
+        }
+      },
+      "delts": {
+        "dims": [
+          "time",
+          "latitude",
+          "longitude"
+        ],
+        "shape": [
+          24,
+          721,
+          1152
+        ],
+        "dtype": "float32",
+        "units": "",
+        "long_name": "change_of_surface_skin_temperature",
+        "range": {
+          "min": "-30.5075",
+          "max": "1.9208"
+        },
+        "statistics": {
+          "count": 19934208,
+          "missing": 0,
+          "mean": "-0.0251",
+          "std": "0.1762",
+          "min": "-30.5075",
+          "max": "1.9208"
+        },
+        "attrs": {
+          "comments": "Unknown1 variable comment",
+          "long_name": "change_of_surface_skin_temperature",
+          "units": "",
+          "grid_name": "grid01",
+          "grid_type": "linear",
+          "level_description": "Earth surface",
+          "time_statistic": "instantaneous"
+        }
+      }
+    },
+    "attributes": {
+      "Conventions": "COARDS",
+      "calendar": "standard",
+      "comments": "File",
+      "model": "geos/das",
+      "center": "gsfc",
+      "source_format": "NetCDF",
+      "source_path": "D:\\Programming\\DRDO\\Datasets\\archive (1)\\OCEAN_RELATED_DATA\\2018\\data.nc4"
+    }
+  }
+}

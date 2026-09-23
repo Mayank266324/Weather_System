@@ -114,6 +114,20 @@ class PlotPanel(QWidget):
         self.figure.subplots_adjust(left=0.12, right=0.92, top=0.88, bottom=0.12, hspace=0.55)
         self.canvas.draw_idle()
 
+    def plot_time_series(self, comparison_series=None, time_index=0):
+        """Render the spatially averaged variables as a dedicated analysis chart."""
+        self._last_comparison_series = comparison_series
+        self.figure.clear()
+        axis = self.figure.add_subplot(111)
+        if not comparison_series or not comparison_series.get("series"):
+            self._show_message(axis, "Time-Series Analysis", "Select a dataset variable to build the time series.")
+            self.canvas.draw_idle()
+            return
+
+        self._plot_comparison(axis, comparison_series, time_index)
+        self.figure.subplots_adjust(left=0.09, right=0.98, top=0.91, bottom=0.18)
+        self.canvas.draw_idle()
+
     def set_statistics(self, statistics):
         self._last_statistics = dict(statistics)
         self.stats_table.setRowCount(len(statistics))
@@ -201,7 +215,7 @@ class PlotPanel(QWidget):
         axis.title.set_color("#f0f4f8")
         axis.xaxis.label.set_color("#dce3ea")
         axis.yaxis.label.set_color("#dce3ea")
-        axis.set_title("Multi-variable spatial mean across time", fontsize=9)
+        axis.set_title("Multi-variable spatial mean across time", fontsize=12)
         colors = ["#49baff", "#ff684f", "#67d18d", "#ffab43", "#b48cff"]
         max_len = 0
 
@@ -222,7 +236,7 @@ class PlotPanel(QWidget):
             axis.axvline(safe_index, color="#ffffff", linewidth=0.9, alpha=0.8)
             axis.set_xlim(0, max_len - 1 if max_len > 1 else 1)
 
-        axis.set_xlabel("time index")
+        axis.set_xlabel("time")
         axis.set_ylabel("spatial mean")
         axis.grid(True, color="#2b3543", linewidth=0.5, alpha=0.85)
         legend = axis.legend(loc="best", fontsize=7, facecolor="#10141a", edgecolor="#2b3543")

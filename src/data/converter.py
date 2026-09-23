@@ -14,6 +14,7 @@ class DatasetConverter:
     def __init__(self):
         self.loaders = {
             ".nc": NetCDFLoader(),
+            ".nc4": NetCDFLoader(),
             ".netcdf": NetCDFLoader(),
             ".cdf": NetCDFLoader(),
             ".grib": GRIBLoader(),

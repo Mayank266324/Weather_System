@@ -11,14 +11,35 @@ class MetadataViewer(QTreeWidget):
         self.setColumnWidth(0, 190)
         self.setFont(QFont("Segoe UI", 9))
         self.header().setFont(QFont("Segoe UI", 9, QFont.Bold))
+        self.setAlternatingRowColors(True)
         self.setStyleSheet(
             """
             QTreeWidget {
                 font-family: "Segoe UI";
                 font-size: 12px;
+                color: #f8fafc;
+                background: #111827;
+                alternate-background-color: #121c2e;
+                border: 1px solid #263446;
+                border-radius: 12px;
+                padding: 4px;
             }
             QTreeWidget::item {
-                min-height: 22px;
+                min-height: 24px;
+                color: #f8fafc;
+                padding: 4px 6px;
+            }
+            QTreeWidget::item:selected {
+                background: #17365f;
+                color: #ffffff;
+            }
+            QHeaderView::section {
+                background: #1a2333;
+                color: #f8fafc;
+                border: none;
+                border-bottom: 1px solid #263446;
+                padding: 7px 6px;
+                font-weight: 600;
             }
             """
         )
