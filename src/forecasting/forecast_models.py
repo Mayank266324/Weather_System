@@ -1,3 +1,4 @@
+from src.forecasting.deep_learning.lstm_forecast import LSTMForecaster
 from src.forecasting.statistical.moving_average import MovingAverageForecaster
 from src.forecasting.statistical.regression_forecast import LinearRegressionForecaster
 
@@ -7,4 +8,6 @@ def build_forecaster(mode):
         return MovingAverageForecaster()
     if mode == "Linear Regression":
         return LinearRegressionForecaster()
-    raise ValueError(f"Unsupported Phase 1 forecast mode: {mode}")
+    if mode == "LSTM":
+        return LSTMForecaster()
+    raise ValueError(f"Unsupported forecast mode: {mode}")

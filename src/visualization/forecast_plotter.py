@@ -87,13 +87,25 @@ class ForecastPanel(QWidget):
         if forecast.actual:
             axis.plot(forecast.test_index, forecast.actual, color="#67d18d", linewidth=2.2, marker="o", markersize=4, label="actual test values")
         if forecast.predicted:
-            axis.plot(forecast.test_index, forecast.predicted, color="#ffab43", linewidth=2.2, marker="o", markersize=4, label="predicted test values")
+            axis.plot(
+                forecast.test_index,
+                forecast.predicted,
+                color="#ffab43",
+                linewidth=2.2,
+                marker="o",
+                markersize=4,
+                label=f"{forecast.model_name} test prediction",
+            )
         if forecast.future:
             axis.plot(forecast.future_index, forecast.future, color="#ff684f", linewidth=2.2, linestyle="--", marker="o", markersize=4, label="future forecast")
 
         units = f" ({forecast.units})" if forecast.units else ""
         region = "Selected Region" if forecast.region_bounds else "Full Dataset Domain"
-        axis.set_title(f"Regional {forecast.variable} Forecast - {region}", fontsize=13, pad=12)
+        axis.set_title(
+            f"{forecast.model_name} | Regional {forecast.variable} Forecast - {region}",
+            fontsize=13,
+            pad=12,
+        )
         axis.set_xlabel("time index")
         axis.set_ylabel(f"{forecast.variable}{units}")
         axis.grid(True, color="#2b3543", linewidth=0.55)

@@ -243,7 +243,7 @@ class MainWindow(QMainWindow):
         self.projection_combo.setStyleSheet(f"color:{C['txt']};background:{C['card']};")
         self.projection_combo.currentTextChanged.connect(self._emit_projection_selection)
         self.forecast_combo = QComboBox()
-        self.forecast_combo.addItems(["Linear Regression", "Moving Average"])
+        self.forecast_combo.addItems(["Linear Regression", "Moving Average", "LSTM"])
         self.forecast_combo.setMinimumWidth(140)
         self.forecast_combo.setStyleSheet(f"color:{C['txt']};background:{C['card']};")
         self.forecast_variable_combo = QComboBox()

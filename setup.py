@@ -20,5 +20,6 @@ setup(
         "scipy",
         "statsmodels",
         "scikit-learn",
+        "torch",
     ],
 )
